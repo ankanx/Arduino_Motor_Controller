@@ -14,7 +14,7 @@
 /*
   Emergecy Break cycle
 */
-#define BREAK -10
+#define BREAK 10
 
 MotorController::MotorController(int SteeringPin,int EnginePin)
 {
@@ -37,7 +37,15 @@ void MotorController::setIdle()
 
 void MotorController::emergencyBreak()
 {
-  _Engine.write(BREAK);
+  if(_Engine.read() > 90){
+    _Engine.write(-BREAK);
+  }else if(_Engine.read() < 90){
+    _Engine.write(BREAK);
+  }else{
+    // Safety Mesure
+    _Engine.write(IDLE);
+  }
+  
   _Steering.write(IDLE);
   delay(100);
   _Engine.write(IDLE);
@@ -45,10 +53,10 @@ void MotorController::emergencyBreak()
 
 void MotorController::setSpeed(int speed)
 {
- _Engine.write(speed);
+ _Engine.write(90+(speed));
 }
 
 void MotorController::setAngle(int degrees)
 {
- _Steering.write(degrees);
+ _Steering.write(90+(degrees));
 }
