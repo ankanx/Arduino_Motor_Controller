@@ -14,12 +14,14 @@ class MotorController
 {
   public:
     MotorController(int SteeringPin, int EnginePin);
+    void start();
+    void setIdle();
+    void emergencyBreak();
     void setSpeed(int speed);
     void setAngle(int degrees);
-    void start();
   private:
-    int _SteeringPin;
-    int _EnginePin;
+    Servo _Engine;
+    Servo _Steering;
 };
 
 #endif

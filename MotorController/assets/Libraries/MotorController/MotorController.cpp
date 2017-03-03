@@ -3,38 +3,52 @@
   Created by Andreas J Fransson, April 30, 2016.
   Released into the public domain.
 */
-
+#include "Arduino.h"
 #include "MotorController.h"
 
-const int IDLE = 90;
+/*
+  IDLE Value 
+*/
+#define IDLE 90
 
+/*
+  Emergecy Break cycle
+*/
+#define BREAK -10
 
 MotorController::MotorController(int SteeringPin,int EnginePin)
 {
-    Servo Steering;
-    Servo Engine;
-    Streering.attach(SteeringPin);
-    Engine.attach(EnginePin);
-
+    Servo _Streering;
+    _Steering.attach(SteeringPin);
+    Servo _Engine;
+    _Engine.attach(EnginePin);
 }
 void MotorController::start()
 {
-   Engine.write(IDLE);
-   Steering.write(IDLE);
+   _Engine.write(IDLE);
+   _Steering.write(IDLE);
 }
 
 void MotorController::setIdle()
 {
-  Engine.write(IDLE);
-  Steering.write(IDLE);
+  _Engine.write(IDLE);
+  _Steering.write(IDLE);
+}
+
+void MotorController::emergencyBreak()
+{
+  _Engine.write(BREAK);
+  _Steering.write(IDLE);
+  delay(100);
+  _Engine.write(IDLE);
 }
 
 void MotorController::setSpeed(int speed)
 {
- Engine.write(speed);
+ _Engine.write(speed);
 }
 
 void MotorController::setAngle(int degrees)
 {
- Steering.write(degrees);
+ _Steering.write(degrees);
 }
