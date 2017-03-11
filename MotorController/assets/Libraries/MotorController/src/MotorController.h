@@ -22,6 +22,8 @@ class MotorController
   private:
     Servo _Engine;
     Servo _Steering;
+    int _EnginePin;
+    int _SteeringPin;
 };
 
 #endif

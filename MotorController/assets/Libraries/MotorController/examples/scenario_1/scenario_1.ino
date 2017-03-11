@@ -4,7 +4,7 @@
 #include <MotorController.h>
 // Set pin 9 as our Steering
 // Set pin 10 as our Engine
-MotorController testMotor(9,10);
+MotorController testMotor(5,3);
 
 void setup() {
   Serial.begin(9600);   
@@ -14,9 +14,10 @@ void setup() {
 
 void loop() {
 
-  testMotor.setSpeed(-20);
+ 
+  testMotor.setAngle(10);
   delay(1000);
-  testMotor.emergencyBreak();
+  //testMotor.emergencyBreak();
 
 }
 

@@ -18,13 +18,16 @@
 
 MotorController::MotorController(int SteeringPin,int EnginePin)
 {
+    _SteeringPin = SteeringPin;
+    _EnginePin = EnginePin;
+
     Servo _Streering;
-    _Steering.attach(SteeringPin);
     Servo _Engine;
-    _Engine.attach(EnginePin);
 }
 void MotorController::start()
 {
+   _Steering.attach(_SteeringPin);
+   _Engine.attach(_EnginePin);
    _Engine.write(IDLE);
    _Steering.write(IDLE);
 }
